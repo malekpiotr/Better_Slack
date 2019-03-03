@@ -4,37 +4,46 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerExample {
     private ServerSocket serverSocket;
-    private Socket clientSocket;
-    private BufferedReader clientInput;
+    private List<Socket> connectedClients = new ArrayList<Socket>();
+    private boolean online;
+    private Thread acceptingThread;
 
     private static final String EXIT_KEYWORD = "exit";
 
     public void startServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         System.out.println("Server is running...");
-        clientSocket = serverSocket.accept();
-        System.out.println("Client has been connected");
+        online = true;
 
-        clientInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-        while(!clientSocket.isClosed()) {
-            String receivedMessage = "";
-
-            try {
-                receivedMessage = clientInput.readLine();
-            } catch(SocketException ex) {
-                System.out.println("Client has been disconnected");
-                break;
+        acceptingThread = new Thread(() -> {
+            while (online) {
+                Socket clientSocket = null;
+                try {
+                    clientSocket = serverSocket.accept();
+                } catch (IOException e) {
+                    online = false;
+                    System.out.println("Server has been disconnected");
+                    break;
+                }
+                connectedClients.add(clientSocket);
+                System.out.println("Client has been connected. " +
+                        "Users online: " + connectedClients.size());
             }
+            System.out.println("Server has been disconnected");
+        });
+        acceptingThread.start();
+    }
 
-            if(receivedMessage.toLowerCase().equals(EXIT_KEYWORD)) {
-                break;
-            }
+    public void shutdown() {
+        online = false;
+    }
 
-            System.out.println(receivedMessage);
-        }
+    public boolean isOnline() {
+        return online;
     }
 }

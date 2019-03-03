@@ -20,12 +20,12 @@ public class ClientExample {
 
         while(true) {
             String userInput = scanner.next();
+            output.println(userInput);
+
             if(userInput.toLowerCase().equals(EXIT_KEYWORD)) {
                 break;
             }
-            output.println(userInput);
         }
     }
-
-    }
+}
 

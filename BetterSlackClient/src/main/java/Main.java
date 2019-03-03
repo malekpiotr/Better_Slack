@@ -5,6 +5,6 @@ public class Main {
 
 
         ClientExample clientExample = new ClientExample();
-        clientExample.connectToServer("localhost", 50000);
+        clientExample.connectToServer("192.168.1.74", 55555);
     }
 }
