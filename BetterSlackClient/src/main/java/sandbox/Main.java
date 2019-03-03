@@ -1,3 +1,7 @@
+package sandbox;
+
+import sandbox.ClientExample;
+
 import java.io.IOException;
 
 public class Main {
