@@ -1,3 +1,5 @@
+package users;
+
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -29,6 +31,7 @@ public class User {
                     " and " + MAX_USERNAME_LENGHT);
         }
         this.username = username;
+        update();
 
     }
 
