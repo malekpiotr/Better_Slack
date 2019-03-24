@@ -1,5 +1,7 @@
 package network;
 
+import settings.ChannelSettings;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +15,9 @@ public class TcpChatClient implements ChatClient {
     private PrintWriter output;
     private BufferedReader input;
     private Thread readerThread;
+
+    private final Channel generalChannel =
+            new InMemoryChannelRepository().findByName(ChannelSettings.DEFAULT_CHANNEL_NAME).get();
 
     private final List<DisconnectObserver> disconnectObservers = new ArrayList<>();
 
@@ -49,8 +54,9 @@ public class TcpChatClient implements ChatClient {
             }
 
             System.out.println(msg);
+            generalChannel.broadcast(this, msg);
         } catch (IOException e) {
-            // TBD
+            disconnect();
         }
     }
 

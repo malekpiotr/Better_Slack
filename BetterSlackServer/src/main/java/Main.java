@@ -1,9 +1,16 @@
-import network.ChatServer;
-import network.TcpChatServer;
+import network.*;
+import utils.BetterSlackInitializer;
+import utils.DefaultInitializer;
+
+import java.util.Collection;
 
 public class Main {
     public static void main(String[] args) {
-        ChatServer chatServer = new TcpChatServer();
+        ChannelRepository channelRepository = new InMemoryChannelRepository();
+        BetterSlackInitializer initializer = new DefaultInitializer(channelRepository);
+        initializer.initialize();
+        Collection<Channel> channel = channelRepository.getAll();
+        ChatServer chatServer = new TcpChatServer(channelRepository);
         chatServer.start(50000);
     }
 }
