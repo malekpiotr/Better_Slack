@@ -13,7 +13,7 @@ public class InMemoryUserDatabase implements UserRepository {
     @Override
     public Optional<User> find(String username) {
         return users.stream()
-                .filter(user -> user.getUsername().equals(username))
-                .findAny();
+            .filter(user -> user.getUsername().equals(username))
+            .findAny();
     }
 }

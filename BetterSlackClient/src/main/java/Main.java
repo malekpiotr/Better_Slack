@@ -1,3 +1,4 @@
+import exceptions.EmptyMessageException;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,8 +7,12 @@ public class Main {
 
         UserInputProvider inputProvider = new ConsoleInputProvider();
         while(client.isOnline()) {
-            String userInput = inputProvider.getUserInput();
-            client.sendMessage(userInput);
+            try {
+                String userInput = inputProvider.getUserInput();
+                client.sendMessage(userInput);
+            } catch(EmptyMessageException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         System.out.println("Bye bye!");
     }

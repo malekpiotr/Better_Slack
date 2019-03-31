@@ -9,5 +9,8 @@
         <module name="BetterSlackClient" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BetterSlack-Common" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

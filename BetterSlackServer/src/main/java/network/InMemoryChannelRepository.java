@@ -1,10 +1,13 @@
 package network;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Repository
 public class InMemoryChannelRepository implements ChannelRepository {
     private static final Set<Channel> channels = new HashSet<>();
 

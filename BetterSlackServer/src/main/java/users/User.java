@@ -36,8 +36,8 @@ public class User {
 
     public static boolean isUsernameValid(String username) {
         return username != null &&
-                username.length() >= MIN_USERNAME_LENGTH &&
-                username.length() <= MAX_USERNAME_LENGTH;
+            username.length() >= MIN_USERNAME_LENGTH &&
+            username.length() <= MAX_USERNAME_LENGTH;
     }
 
     private void update() {

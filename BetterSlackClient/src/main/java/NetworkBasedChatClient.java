@@ -1,4 +1,4 @@
-public interface NetworkBasedChatClient extends ChatClient{
+public interface NetworkBasedChatClient extends ChatClient {
     void connect(String ip, int port);
     void disconnect();
     void sendMessage(String message);

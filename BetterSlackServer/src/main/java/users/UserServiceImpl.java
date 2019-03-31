@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
                     "a length between " + User.MIN_USERNAME_LENGTH +
                     " and " + User.MAX_USERNAME_LENGTH);
         }
-
+        
         User user = new User(username, password);
         userRepository.add(user);
     }
